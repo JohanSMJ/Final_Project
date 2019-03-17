@@ -1,11 +1,11 @@
 package model.entity;
 
+import model.dao.Events;
+
 public class Cup {
-	private Institute winner;
-	private Event event;
+	private Events event;
 	
-	public Cup(Institute winner, Event event) {
-		this.winner=winner;
+	public Cup(Events event) {
 		this.event=event;
 	}
 }

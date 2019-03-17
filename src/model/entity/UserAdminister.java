@@ -1,28 +1,12 @@
 package model.entity;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
-import utilities.DateUtilities;
-
-public class Member extends Person{
-	private Instrument instrument;
-	public Member(String name, Calendar birthDate, DocumentType documentType, String iD, Gender genere,Instrument instrument) {
+public class UserAdminister extends Person{
+	private String nickName;
+	private String password;
+	public UserAdminister(String name, Calendar birthDate, DocumentType documentType, String iD, Gender genere) {
 		super(name, birthDate, documentType, iD, genere);
-		this.instrument=instrument;
-	}
-	public String getNameInstrument() {
-		return instrument.getName();
-	}
-	public void setNameInstrument(String name) {
-		instrument.setName(name);
-	}
-	public boolean getState() {
-		return instrument.isState();
-	}
-	public void setState(boolean state) {
-		instrument.setState(state);
 	}
 	public void setName(String name) {
 		super.setName(name);
@@ -54,7 +38,5 @@ public class Member extends Person{
 	public String getDocumentType() {
 		return super.getDocumentType();
 	}
-	public String toString() {
-		return super.getName()+"/"+super.getDocumentType()+"/"+super.getiD()+"/"+super.getAge()+"/"+super.getGenere()+"/"+instrument.getName()+"/"+instrument.isState();
-	}
+
 }

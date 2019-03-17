@@ -7,7 +7,6 @@ public class StringInstrument implements IInstrumentType{
 	public String getInstrumentDescription() {
 		return ""+TYPE+", "+instrumentDescription;
 	}
-
 	@Override
 	public void setInstrumentDescription(String description) {
 		this.instrumentDescription=description;
