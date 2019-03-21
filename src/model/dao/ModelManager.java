@@ -1,14 +1,14 @@
 package model.dao;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import model.entity.Member;
+import utilities.DateUtilities;
 
 public class ModelManager {
-	 ManagerEvent managerEvent;
 	 Region region;
 	 public ModelManager(ArrayList<Department> departments) {
-		 managerEvent=new ManagerEvent();
 		 region=new Region(departments);
 	 }
 	public Object[][] getDataTotal(){
@@ -20,11 +20,11 @@ public class ModelManager {
 	public Object[] getDataSpecificInstitute(String iDDepartment,String iDInstitute) {
 		return region.getDataSpecific(iDDepartment, iDInstitute);
 	}
-	public Object[] getDataMembersSpecificInstituteSpecificDeprtment(String iDDepartment,String iDInstitute) {
+	public Object[][] getDataMembersSpecificInstituteSpecificDeprtment(String iDDepartment,String iDInstitute) {
 		return region.getDataMembersSpecificInstituteSpecificDeprtment(iDDepartment, iDInstitute);
 	}
-	public Object[] getStateInstrumentsSpcificInstititeSpecificDepartment(String iDDepartment,String iDInstitute){
-		return region.getStateInstrumentsSpcificInstititeSpecificDepartment(iDDepartment, iDInstitute);
+	public Object[] getStateInstrumentsSpcificInstititeSpecificDepartment(String iDDepartment){
+		return region.getStateInstrumentsSpcificInstititeSpecificDepartment(iDDepartment);
 	}
 	public Object[][] getDataDepartmentsCups(int numberRank){
 		return region.getDataDepartmentsCups(numberRank);
@@ -47,11 +47,31 @@ public class ModelManager {
 	public Object[][] getDateFundationInstitutes(String iDDepartment){
 		return region.getDateFundationInstitutes(iDDepartment);
 	}
-	public Object[][] getDateEventsConfirmet(){
-		return managerEvent.getDateEventsConfirmet();
+	public void addCupToInstitute(String iDDepartment,String iDInstitute) {
+		region.addCupToInstiute(iDDepartment, iDInstitute);
 	}
-	public Object[][] getDateEventsInProcess(){
-		return managerEvent.getDateEventsInProcess();
-		
+	public Institute getDataObjctInstiute(String iDDepartment,String iDInstitute) {
+		return region.getDataObjctInstiute(iDDepartment, iDInstitute);
+	}
+	public boolean validateIDMember(String iDMember) {
+		return region.validateIDMember(iDMember);
+	}
+	public boolean validateIDIntitute(String iDInstitute) {
+		return region.validateIDInstiute(iDInstitute);
+	}
+	public int getNumberTotalInstitutes() {
+		return region.getNumberTotalInstitutes();
+	}
+	public void removeInstitute(String iDDepartment,String iDInstitute) {
+		region.removeInstitute(iDDepartment, iDInstitute);
+	}
+	public void removeMember(String iDDepartment,String iDInstitute,String iDMember) {
+		region.removeMember(iDDepartment, iDInstitute, iDMember);
+	}
+	public Object[] numberGenders() {
+		return region.numberGenders();
+	}
+	public Object[][] twoMostCups(){
+		return region.twoMostCups();
 	}
 }

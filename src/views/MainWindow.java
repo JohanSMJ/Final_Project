@@ -35,9 +35,10 @@ public class MainWindow extends JFrame{
 	private static final long serialVersionUID = 1L;
 	JLabel imageMenu,bannerCenter,labelReport,labelGraphs;
 	JMenuBar menuBar;
-	JMenuItem logIn,itemSpanish,itemEnglish,itemExit,itemReportAllInstitutes,itemReportInstitutesDepartment,
-	itemReportInstitute, itemGraphEstateInstrument,itemReportCups,itemGraphNumberInstitute,itemReportDirectorDepartment,
-	itemReportAllDirector,itemGraphFundation,itemReportConfirmedEvents,itemsReportProcessEvents;
+	JMenuItem logIn,itemSpanish,itemEnglish,itemExit,itemReportAllInstitutes,
+	itemReportInstitutesDepartment,itemReportInstitute, itemGraphEstateInstrument
+	,itemReportCups,itemGraphGender,itemReportDirectorDepartment,
+	itemReportAllDirector,itemReportGender,itemsReportNumberSchools;
 
 	JPanel panelMenu, panelCenter;
 	JToolBar toolBar;
@@ -56,7 +57,8 @@ public class MainWindow extends JFrame{
 		this.setSize(1200, 700);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
-		this.setTitle("PROYECTO");
+		this.setIconImage(Utilities.resizeImage(16, 16, "imgs/menu_principal2.png").getImage());
+		this.setTitle("R.A.M.I.");
 		this.setLayout(new BorderLayout());
 		this.setUIManager();
 		this.inItComponents();
@@ -173,11 +175,12 @@ public class MainWindow extends JFrame{
 		itemReportAllDirector=new JMenuItem();
 		menuReports.add(itemReportAllDirector);
 		
-		itemReportConfirmedEvents=new JMenuItem();
-		menuReports.add(itemReportConfirmedEvents);
 		
-		itemsReportProcessEvents=new JMenuItem();
-		menuReports.add(itemsReportProcessEvents);
+		itemsReportNumberSchools=new JMenuItem();
+		menuReports.add(itemsReportNumberSchools);
+		
+		itemReportGender=new JMenuItem();
+		menuReports.add(itemReportGender);
 		
 		labelGraphs=new JLabel();
 		labelGraphs.setFont(ConstansGUI.FONT_MENUS);
@@ -189,11 +192,9 @@ public class MainWindow extends JFrame{
 		itemGraphEstateInstrument=new JMenuItem();
 		menuReports.add(itemGraphEstateInstrument);
 		
-		itemGraphNumberInstitute=new JMenuItem();
-		menuReports.add(itemGraphNumberInstitute);
+		itemGraphGender=new JMenuItem();
+		menuReports.add(itemGraphGender);
 		
-		itemGraphFundation=new JMenuItem();
-		menuReports.add(itemGraphFundation);
 		
 		
 		menuBar.add(menuReports);
@@ -248,12 +249,11 @@ public class MainWindow extends JFrame{
 		itemReportCups.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.REPORT_CUPS.name()));
 		itemReportDirectorDepartment.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.REPORT_DIRECTOR_BY_DEPARMENT.name()));
 		itemReportAllDirector.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.REPORT_ALL_DIRECTORS.name()));
-		itemReportConfirmedEvents.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.REPORT_CONFIRMED_EVENTS.name()));
-		itemsReportProcessEvents.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.REPORT_PROCESS_EVENTS.name()));
+		itemsReportNumberSchools.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.REPORT_NUMBER_SCHOOLS.name()));
 		labelGraphs.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.GRAPHS.name()));
 		itemGraphEstateInstrument.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.GRAPHS_ESTATE_INSTRUMENT.name()));
-		itemGraphNumberInstitute.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.GRAPHS_NUMBER_INSTITUTE.name()));
-		itemGraphFundation.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.GRAPHS_FUNDATION.name()));
+		itemGraphGender.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.GRAPH_GENDER.name()));
+		itemReportGender.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.REPORT_GENDER.name()));
 	
 	
 	}
@@ -265,6 +265,10 @@ public class MainWindow extends JFrame{
 		buttonAdmin.addActionListener(controllerApps);
 		logInButton.setActionCommand(Commands.SHOW_LOG_IN.name());
 		logInButton.addActionListener(controllerApps);
+		itemEnglish.setActionCommand(Commands.CHANGE_TO_ENGLISH.name());
+		itemEnglish.addActionListener(controllerApps);
+		itemSpanish.setActionCommand(Commands.CHANGE_TO_SPANISH.name());
+		itemSpanish.addActionListener(controllerApps);
 		
 		itemExit.setActionCommand(Commands.EXIT.name());
 		itemExit.addActionListener(controllerApps);
@@ -283,16 +287,17 @@ public class MainWindow extends JFrame{
 		itemReportDirectorDepartment.addActionListener(controllerApps);
 		itemReportAllDirector.setActionCommand(Commands.REPORT_ALL_DIRECTORS.name());
 		itemReportAllDirector.addActionListener(controllerApps);
-		itemReportConfirmedEvents.setActionCommand(Commands.REPORT_CONFIRMED_EVENTS.name());
-		itemReportConfirmedEvents.addActionListener(controllerApps);
-		itemsReportProcessEvents.setActionCommand(Commands.REPORT_PROCESS_EVENTS.name());
-		itemsReportProcessEvents.addActionListener(controllerApps);
+		
+		itemsReportNumberSchools.setActionCommand(Commands.REPORT_NUMBER_SCHOOLS.name());
+		itemsReportNumberSchools.addActionListener(controllerApps);
+		
 		itemGraphEstateInstrument.setActionCommand(Commands.GRAPHS_ESTATE_INSTRUMENT.name());
 		itemGraphEstateInstrument.addActionListener(controllerApps);
-		itemGraphNumberInstitute.setActionCommand(Commands.GRAPHS_NUMBER_INSTITUTE.name());
-		itemGraphNumberInstitute.addActionListener(controllerApps);
-		itemGraphFundation.setActionCommand(Commands.GRAPHS_FUNDATION.name());
-		itemGraphFundation.addActionListener(controllerApps);
+		
+		itemGraphGender.setActionCommand(Commands.GRAPHS_GENDER.name());
+		itemGraphGender.addActionListener(controllerApps);
+		itemReportGender.setActionCommand(Commands.REPORT_GENDER.name());
+		itemReportGender.addActionListener(controllerApps);
 	}
 	
 	public void hideMe() {

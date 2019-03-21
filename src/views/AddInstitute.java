@@ -20,6 +20,7 @@ import com.toedter.calendar.JDateChooser;
 
 import controller.Commands;
 import controller.ControllerApps;
+import properties.HandlerLanguage;
 import utilities.DateUtilities;
 import utilities.Utilities;
 
@@ -27,14 +28,16 @@ public class AddInstitute extends JDialog{
 	
 	JPanel panelMenu,panelCenter;
 	GridSystem gridCenter,gridMenu;
-	JTextField textNameInstitute,textNameDirector,textIdDirector;
-	JLabel labelPrincipal, labelNameInstitute, labelNameDirector,labelIdDirector,labelFoundationDate;
+	JTextField textNameInstitute;
+	JLabel labelPrincipal, labelNameInstitute,labelFoundationDate;
 	JButton buttonBack,buttonAdd;
 	JDateChooser dateChooser;
 	 
 	 public AddInstitute(ControllerApps controllerApps) {
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setSize(400, 600);
+		this.setIconImage(Utilities.resizeImage(16, 16, "imgs/menu_principal2.png").getImage());
+		this.setTitle("R.A.M.I.");
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setLayout(new BorderLayout());
@@ -68,15 +71,6 @@ public class AddInstitute extends JDialog{
 		panelCenter.add(dateChooser,gridCenter.insertComponent(5, 1, 10, 1));
 		
 		//nombre director //id
-		 labelNameDirector=new JLabel("NOMBRE DEL DIRECOTOR");
-		 panelCenter.add(labelNameDirector,gridCenter.insertComponent(6, 1, 10, 1));
-		 textNameDirector=new JTextField();
-		 panelCenter.add(textNameDirector,gridCenter.insertComponent(7, 1, 10, 1));
-		 
-		 labelIdDirector=new JLabel("ID DEL DIRECTOR");
-		 panelCenter.add(labelIdDirector,gridCenter.insertComponent(8, 1, 10, 1));
-		 textNameInstitute=new JTextField();
-		 panelCenter.add(textNameInstitute,gridCenter.insertComponent(9, 1, 10, 1));
 		 
 		 buttonAdd=new JButton("AGREGAR");
 		 buttonAdd.setFont(ConstansGUI.FONT_BUTTON);
@@ -84,7 +78,7 @@ public class AddInstitute extends JDialog{
 		 buttonAdd.setBackground(ConstansGUI.COLOR_IMPORTANT_BUTTON);
 		 buttonAdd.setBorderPainted(false);
 		 gridCenter.addExternalBorder(5, 2, 5, 2);
-		 panelCenter.add(buttonAdd,gridCenter.insertComponent(10, 5, 3, 1));
+		 panelCenter.add(buttonAdd,gridCenter.insertComponent(6, 5, 3, 1));
 		 gridCenter.addExternalBorder(0, 0, 0, 0);
 		 
 		
@@ -120,17 +114,53 @@ public class AddInstitute extends JDialog{
 	private void setCommands(ControllerApps controllerApps) {
 		buttonAdd.setActionCommand(Commands.ADD_INSTITUTE.name());
 		buttonAdd.addActionListener(controllerApps);
+		buttonBack.setActionCommand(Commands.BACK_TO_ADMIN_WINDOW.name());
+		buttonBack.addActionListener(controllerApps);
 	}
 	
-	private void changeLanguage() {
-		// TODO Auto-generated method stub
+	public void changeLanguage() {
+		labelPrincipal.setText(HandlerLanguage.languageProperties.getProperty(
+				LabelsGUI.ADD_INSTITUTE.name()));
+
+		labelNameInstitute.setText(HandlerLanguage.languageProperties.getProperty(
+				LabelsGUI.INSTITUTE_NAME.name()));
+		
+		labelFoundationDate.setText(HandlerLanguage.languageProperties.getProperty(
+				LabelsGUI.FUNDATION_DATE.name()));
 		
 	}
 	
-	@SuppressWarnings("deprecation")
-	public void getDate() {
-		Calendar date= dateChooser.getCalendar();
-		JOptionPane.showMessageDialog(null, "fecha: "+DateUtilities.calendarToString(date));
-		
+	public Object[] getData() {
+		Object[] data=null;
+		if (validateData()) {
+			Object[] temp= {textNameInstitute.getText(),dateChooser.getCalendar()};
+			data=temp;
+		}
+		return data;
+	}
+	
+	private boolean validateData() {
+		boolean val=true;
+			if (textNameInstitute.getText().equals("")) {
+				val=false;
+			}
+			return val;
+	}
+	
+
+
+	public void showMe() {
+		clear();
+		this.setVisible(true);
+	}
+	
+	public void hideMe() {
+		clear();
+		this.setVisible(false);
+	}
+	
+	public void clear() {
+		textNameInstitute.setText("");
+		dateChooser.setCalendar(DateUtilities.getCalendarDateNow());
 	}
 }

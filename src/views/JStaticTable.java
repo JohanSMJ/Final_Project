@@ -3,6 +3,7 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.util.Iterator;
 
 import javax.swing.BoxLayout;
@@ -44,8 +45,9 @@ public class JStaticTable extends JPanel{
 			defaultTableModel=new DefaultTableModel();
 			
 			table=new JTable();
+			table.setRowHeight(35);
 			table.setOpaque(false);
-
+			table.setEnabled(false);
 			table.setModel(defaultTableModel);
 			table.getTableHeader().setReorderingAllowed(false);
 			table.getTableHeader().setBackground(ConstansGUI.COLOR_IMPORTANT_BUTTON);
@@ -75,6 +77,7 @@ public class JStaticTable extends JPanel{
 		
 		public void addElement(Object[] vector) {
 			defaultTableModel.addRow(vector);
+			
 		}
 		
 		public void addElementsToTable(Object[][] matriz) {
@@ -99,15 +102,11 @@ public class JStaticTable extends JPanel{
 		}
 		
 		public Object[][] getContentTable() {
-			Object[][] matrix=new Object [defaultTableModel.getRowCount()+1][defaultTableModel.getColumnCount()];
-			String property="";
-			for (int k = 0; k < this.headers.length; k++) {
-				property=this.headers[k].name();
-				matrix[0][k]=HandlerLanguage.languageProperties.getProperty(property);
-			}
+			Object[][] matrix=new Object [defaultTableModel.getRowCount()][defaultTableModel.getColumnCount()];
+			
 			for (int i = 0; i < defaultTableModel.getRowCount(); i++) {
 				for (int j = 0; j < defaultTableModel.getColumnCount(); j++) {
-					matrix[(i+1)][j]=defaultTableModel.getValueAt(i, j);
+					matrix[i][j]=defaultTableModel.getValueAt(i, j);
 				}
 			}
 			

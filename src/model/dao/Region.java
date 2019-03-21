@@ -2,7 +2,6 @@ package model.dao;
 
 import java.util.ArrayList;
 
-import model.entity.Event;
 import model.entity.Member;
 
 public class Region {
@@ -22,8 +21,8 @@ public class Region {
 	public Object[][] getDataMembersSpecificInstituteSpecificDeprtment(String iDDepartment,String iDInstitute){
 		return managerDepartment.getDataMembersSpcificInstititeSpecificDepartment(iDDepartment, iDInstitute);
 	}
-	public Object[] getStateInstrumentsSpcificInstititeSpecificDepartment(String iDDepartment,String iDInstitute){
-		return managerDepartment.getStateInstrumentsSpcificInstititeSpecificDepartment(iDDepartment, iDInstitute);
+	public Object[] getStateInstrumentsSpcificInstititeSpecificDepartment(String iDDepartment){
+		return managerDepartment.getStateInstrumentsSpcificInstititeSpecificDepartment(iDDepartment);
 	}
 	public Object[][] getDataDepartmentsCups(int numberRank){
 		return managerDepartment.getDataDepartmentsCups(numberRank);
@@ -46,7 +45,34 @@ public class Region {
 	public Object[][] getDateFundationInstitutes(String iDDepartment){
 		return managerDepartment.dataYearsInstitutes(iDDepartment);
 	}
-	public void createDepartment() {
-		
+	public void addCupToInstiute(String iDDepartment,String iDInstitute) {
+		managerDepartment.addCupToInstitute(iDDepartment, iDInstitute);
+	}
+	public Institute getDataObjctInstiute(String iDDepartment,String iDInstitute) {
+		return managerDepartment.getDataObjctInstiute(iDDepartment, iDInstitute);
+	}
+	public boolean validateIDMember(String iDMember) {
+		return managerDepartment.validateIDMember(iDMember);
+	}
+	public boolean validateIDInstiute(String iDInstitute) {
+		return managerDepartment.validateIDInstitute(iDInstitute);
+	}
+	public Institute searchInstituteTotal(String iDInstitute) {
+		return managerDepartment.searchInstituteTotal(iDInstitute);
+	}
+	public int getNumberTotalInstitutes() {
+		return managerDepartment.getnumberTotalInstitutes();
+	}
+	public void removeInstitute(String iDDepartment,String iDInstitute) {
+		managerDepartment.removeInstitute(iDDepartment, iDInstitute);
+	}
+	public void removeMember(String iDDepartment,String iDInstitute,String iDMember) {
+		managerDepartment.removeMember(iDDepartment, iDInstitute, iDMember);
+	}
+	public Object[] numberGenders() {
+		return managerDepartment.numberGenders();
+	}
+	public Object[][] twoMostCups(){
+		return managerDepartment.twoMostCups();
 	}
 }

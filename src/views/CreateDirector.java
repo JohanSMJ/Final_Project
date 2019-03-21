@@ -3,18 +3,14 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagLayout;
-import java.awt.event.WindowEvent;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
@@ -27,11 +23,11 @@ import properties.HandlerLanguage;
 import utilities.DateUtilities;
 import utilities.Utilities;
 
-public class AddMember extends JDialog{
+public class CreateDirector extends JDialog{
 	
 	JPanel panelMenu,panelCenter;
 	GridSystem gridCenter,gridMenu;
-	JTextField textNameMember,textNumberID;
+	JTextField textNameDirector,textNumberID;
 	JLabel labelPrincipal, labelNameMember, labelTypeDocument,labelIdNumber,labelBirthDate,
 	labelGender;
 	JButton buttonBack,buttonAdd;
@@ -40,13 +36,13 @@ public class AddMember extends JDialog{
 	JComboBox<DocumentType> typeDocument;
 	JComboBox<String>gender;
 	
-	public AddMember(ControllerApps controllerApps) {
+	public CreateDirector(ControllerApps controllerApps) {
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setSize(400, 700);
-		this.setIconImage(Utilities.resizeImage(16, 16, "imgs/menu_principal2.png").getImage());
-		this.setTitle("R.A.M.I.");
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
+		this.setIconImage(Utilities.resizeImage(16, 16, "imgs/menu_principal2.png").getImage());
+		this.setTitle("R.A.M.I.");
 		this.setLayout(new BorderLayout());
 		this.setUIManager();
 		this.inItComponents();
@@ -62,13 +58,13 @@ public class AddMember extends JDialog{
 		panelCenter.setBackground(ConstansGUI.PANEL_CENTER);
 		gridCenter=new GridSystem(panelCenter);
 		
-		labelPrincipal=new JLabel();
+		labelPrincipal=new JLabel("NUEVO DIRECTOR");
 		panelCenter.add(labelPrincipal,gridCenter.insertComponent(1, 6, 2, 1));
 		
-		labelNameMember=new JLabel("NOMBRE DEL miembro");
+		labelNameMember=new JLabel("NOMBRE DEL DIRECROE");
 		panelCenter.add(labelNameMember,gridCenter.insertComponent(2, 1, 10, 1));
-		textNameMember=new JTextField();
-		panelCenter.add(textNameMember,gridCenter.insertComponent(3, 1, 10, 1));
+		textNameDirector=new JTextField();
+		panelCenter.add(textNameDirector,gridCenter.insertComponent(3, 1, 10, 1));
 		
 		labelBirthDate=new JLabel("FECHA");
 		panelCenter.add(labelBirthDate, gridCenter.insertComponent(4, 1, 10, 1));
@@ -142,7 +138,7 @@ public class AddMember extends JDialog{
 		
 	}
 	private void setCommands(ControllerApps controllerApps) {
-		buttonAdd.setActionCommand(Commands.SHOW_INSTRUMENT_WINDOW.name());
+		buttonAdd.setActionCommand(Commands.FINISH_DIRECTOR.name());
 		buttonAdd.addActionListener(controllerApps);
 		buttonBack.setActionCommand(Commands.BACK_TO_ADMIN_WINDOW.name());
 		buttonBack.addActionListener(controllerApps);
@@ -151,10 +147,10 @@ public class AddMember extends JDialog{
 	public void changeLanguage() {
 		changeLanguageOfCombo();
 		labelPrincipal.setText(HandlerLanguage.languageProperties.getProperty(
-				LabelsGUI.ADD_MEMBER_TEXT.name()));
+				LabelsGUI.ADD_DIRECTOR_TEXT.name()));
 		
 		labelNameMember.setText(HandlerLanguage.languageProperties.getProperty(
-				LabelsGUI.NAME_MEMBER.name()));
+				LabelsGUI.NAME_DIRECTOR.name()));
 
 		labelBirthDate.setText(HandlerLanguage.languageProperties.getProperty(
 				LabelsGUI.BIRTHDATE_TEXT.name()));
@@ -171,11 +167,17 @@ public class AddMember extends JDialog{
 				LabelsGUI.ADD_BUTTON.name()));
 	}
 	
+	@SuppressWarnings("deprecation")
+	public void getDate() {
+		Calendar date= dateChooser.getCalendar();
+		JOptionPane.showMessageDialog(null, "fecha: "+DateUtilities.calendarToString(date));
+		
+	}
 	
 	private boolean validateData() {
 		boolean val=true;
 		
-		if (textNameMember.getText().equals("")) {
+		if (textNameDirector.getText().equals("")) {
 			val=false;
 		}
 		
@@ -190,8 +192,17 @@ public class AddMember extends JDialog{
 	public Object[] getData() {
 		Object[] data=null;
 		if (this.validateData()) {
-			Object [] temp= {textNameMember.getText(),dateChooser.getCalendar(),
-					typeDocument.getSelectedItem(),textNumberID.getText(),gender.getSelectedItem()};
+			System.out.println("-----------------------------------");
+			
+			System.out.println((String)gender.getSelectedItem());
+			System.out.println("-----------------------------------");
+			Object [] temp= new Object [5];
+			temp[0]=textNameDirector.getText();
+			temp[1]=dateChooser.getCalendar();
+			temp[2]=(DocumentType) typeDocument.getSelectedItem();
+			temp[3]=textNumberID.getText();
+			temp[4]=gender.getSelectedItem();
+				
 			data=temp;
 		}
 		return data;
@@ -209,7 +220,7 @@ public class AddMember extends JDialog{
 		}
 	}
 	private void clear() {
-		textNameMember.setText("");
+		textNameDirector.setText("");
 		textNumberID.setText("");
 		dateChooser.setCalendar(DateUtilities.getCalendarDateNow());
 	}

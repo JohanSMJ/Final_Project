@@ -36,12 +36,14 @@ public class ReportTable extends JDialog{
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setResizable(false);
+		this.setIconImage(Utilities.resizeImage(16, 16, "imgs/menu_principal2.png").getImage());
+		this.setTitle("R.A.M.I.");
 		this.setLayout(new BorderLayout());
 		this.inItComponents(headers,matrix,controllerApps,titlePrincipal,isAdmin);
 		this.setVisible(true);
 	}
 	private void inItComponents( LabelsGUI[] headers,Object[][]matrix,ControllerApps controllerApps,String titlePrincipal,boolean isAdmin) {
-		this.inItMenu();
+		this.inItMenu(headers);
 		this.inItForm(headers,matrix,titlePrincipal);
 		if (isAdmin) {
 			this.setAdminCommands(controllerApps);
@@ -75,11 +77,14 @@ public class ReportTable extends JDialog{
 		buttonPrint.setFont(ConstansGUI.FONT_BUTTON);
 		buttonPrint.setForeground(Color.BLACK);
 		gridCenter.addExternalBorder(10, 250, 10, 250);
-		panelCenter.add(buttonPrint,gridCenter.insertComponent(6, 1, 10, 1));
+		if (headers.equals(ConstansGUI.PRINCIPAL_TABLE_HEADERS)) {
+			
+			panelCenter.add(buttonPrint,gridCenter.insertComponent(6, 1, 10, 1));
+		}
 		this.add(panelCenter,BorderLayout.CENTER);
 	}
 	
-	private void inItMenu() {
+	private void inItMenu(LabelsGUI[] headers) {
 		panelMenu=new JPanel();
 		panelMenu.setLayout(new GridBagLayout());
 		gridMenu=new GridSystem(panelMenu);
@@ -95,9 +100,17 @@ public class ReportTable extends JDialog{
 		buttonExport.setBackground(ConstansGUI.COLOR_TOOLBAR);
 		buttonExport.setBorderPainted(false);
 		buttonExport.setIcon(Utilities.resizeImage(30, 30, "imgs/export_button.png"));
-		panelMenu.add(buttonExport,gridMenu.insertComponent(1, 10, 1, 1));
+		
+		if (headers.equals(ConstansGUI.PRINCIPAL_TABLE_HEADERS)) {
+			
+			panelMenu.add(buttonExport,gridMenu.insertComponent(1, 10, 1, 1));
+		}
 		
 		this.add(panelMenu,BorderLayout.NORTH);
+	}
+	
+	public Object[][] getContentTable() {
+		return jStaticTable.getContentTable();
 	}
 	
 	public void updateWindow(LabelsGUI[] headers,Object[][] matrix,String title) {

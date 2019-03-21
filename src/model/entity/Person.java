@@ -51,11 +51,11 @@ public class Person {
 		this.iD = iD;
 	}
 
-	public String getGenere() {
+	public String getGender() {
 		return genere.name();
 	}
 
-	public void setGenere(Gender genere) {
+	public void setGender(Gender genere) {
 		this.genere = genere;
 	}
 	public String getAge() {

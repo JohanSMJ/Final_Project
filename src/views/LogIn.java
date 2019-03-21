@@ -35,6 +35,8 @@ public class LogIn extends JDialog{
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setSize(400, 600);
 		this.setLocationRelativeTo(null);
+		this.setIconImage(Utilities.resizeImage(16, 16, "imgs/menu_principal2.png").getImage());
+		this.setTitle("R.A.M.I.");
 		this.setLayout(new BorderLayout());
 		this.setResizable(false);
 		this.setUIManager();

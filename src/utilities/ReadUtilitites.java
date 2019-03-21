@@ -79,7 +79,9 @@ public class ReadUtilitites {
 		int random=0;
 		for (int i = ReadUtilitites.conIdsInstitute; i <(ReadUtilitites.conIdsInstitute+numberInstitutes); i++) {
 			random=ReadUtilitites.randomNumber(1, 20);
-			institute=new Institute(instituts.get(random), DateUtilities.calendarAlAzar(),i+"", Member(personas, instruments,ReadUtilitites.randomNumber(15, 25)),ReadUtilitites.director(personas, instituts.get(random), i+""));
+			institute=new Institute(instituts.get(random), DateUtilities.calendarAlAzar(),
+					""+i,ReadUtilitites.randomNumber(0, 10), Member(personas, instruments,
+							randomNumber(15, 25)), ReadUtilitites.director(personas, instituts.get(random), ""+i));
 			institutes.add(institute);
 			cons=i-ReadUtilitites.conIdsInstitute;
 		}
@@ -122,6 +124,14 @@ public class ReadUtilitites {
 	public static String[] splitSlash(String lineText){
 		String[] line=lineText.split("/+");
 		return line;
+	}
+	
+	public static String splitPoint(String lineText){
+		String[] line=lineText.split("\\.");
+		for (int i = 0; i < line.length; i++) {
+			System.out.println(line[i]);
+		}
+		return line[line.length-1];
 	}
 	public static DocumentType createDocupentType(String documentType) {
 		if(DocumentType.CC.name().equals(documentType))

@@ -25,12 +25,14 @@ public class AdminWindow extends JFrame{
 	JStaticTable staticTable;
 	JButton buttonBack;
 	JToolBar toolBar;
-	JMenu menuReports,menuEvents;
+	JMenu menuReports,menuLanguage;
 	JMenuBar menuBar,menuBarUser;
 	JMenuItem itemExit,itemBack,addInstitute,addMember,itemSearch,deleteInstitute,deleteMember,
-	itemReportAllInstitutes,itemReportInstitutesDepartment,itemReportInstitute, itemGraphEstateInstrument,
-	itemReportCups,itemGraphNumberInstitute,itemReportDirectorDepartment,itemReportAllDirector,itemGraphFundation,
-	itemReportConfirmedEvents,itemsReportProcessEvents,itemSearchEvent,itemAddEvent;
+	itemReportAllInstitutes,itemReportInstitutesDepartment,itemReportInstitute,
+	itemReportCups,itemGraphNumberInstitute,itemReportDirectorDepartment,itemReportAllDirector,
+	itemEnglish,itemReportGender,itemsReportNumberSchools,itemGraphEstateInstrument,itemGraphGender,
+	itemGraphNumberCups,itemSpanish;
+//	
 	JMenu menuUser,instituteMenu,menuAdd,menuDelete;
 	GridSystem gridMenu,gridCenter;
 	
@@ -40,6 +42,8 @@ public class AdminWindow extends JFrame{
 		this.setSize(1200, 700);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
+		this.setIconImage(Utilities.resizeImage(16, 16, "imgs/menu_principal2.png").getImage());
+		this.setTitle("R.A.M.I.");
 		this.setLayout(new BorderLayout());
 		this.setUIManager();
 		this.inItComponents(headers,matrix);
@@ -53,6 +57,24 @@ public class AdminWindow extends JFrame{
 		itemBack.setActionCommand(Commands.BACK_TO_MAIN_WINDOW.name());
 		itemExit.addActionListener(controllerApps);
 		itemExit.setActionCommand(Commands.EXIT.name());
+	
+		itemSearch.setActionCommand(Commands.REPORT_INSTITUTE_A.name());
+		itemSearch.addActionListener(controllerApps);
+		
+		
+		itemEnglish.addActionListener(controllerApps);
+		itemEnglish.setActionCommand(Commands.CHANGE_TO_ENGLISH.name());
+		
+		itemSpanish.addActionListener(controllerApps);
+		itemSpanish.setActionCommand(Commands.CHANGE_TO_SPANISH.name());
+		
+		addInstitute.addActionListener(controllerApps);
+		addInstitute.setActionCommand(Commands.SHOW_ADD_INSTITUTE_WINDOW.name());
+		
+		addMember.addActionListener(controllerApps);
+		addMember.setActionCommand(Commands.SHOW_ADD_MEMBER_WINDOW.name());
+		
+		
 		//-----------reports-------------
 		itemReportAllInstitutes.setActionCommand(Commands.REPORT_ALL_INSTITUTES_A.name());
 		itemReportAllInstitutes.addActionListener(controllerApps);
@@ -66,16 +88,20 @@ public class AdminWindow extends JFrame{
 		itemReportDirectorDepartment.addActionListener(controllerApps);
 		itemReportAllDirector.setActionCommand(Commands.REPORT_ALL_DIRECTORS_A.name());
 		itemReportAllDirector.addActionListener(controllerApps);
-		itemReportConfirmedEvents.setActionCommand(Commands.REPORT_CONFIRMED_EVENTS_A.name());
-		itemReportConfirmedEvents.addActionListener(controllerApps);
-		itemsReportProcessEvents.setActionCommand(Commands.REPORT_PROCESS_EVENTS_A.name());
-		itemsReportProcessEvents.addActionListener(controllerApps);
-		itemGraphEstateInstrument.setActionCommand(Commands.GRAPHS_ESTATE_INSTRUMENT_A.name());
+		
+		
+		itemsReportNumberSchools.setActionCommand(Commands.REPORT_NUMBER_SCHOOLS_A.name());
+		itemsReportNumberSchools.addActionListener(controllerApps);
+		
+		itemGraphEstateInstrument.setActionCommand(Commands.GRAPHS_ESTATE_INSTRUMENT.name());
 		itemGraphEstateInstrument.addActionListener(controllerApps);
-		itemGraphNumberInstitute.setActionCommand(Commands.GRAPHS_NUMBER_INSTITUTE_A.name());
-		itemGraphNumberInstitute.addActionListener(controllerApps);
-		itemGraphFundation.setActionCommand(Commands.GRAPHS_FUNDATION_A.name());
-		itemGraphFundation.addActionListener(controllerApps);
+		itemReportGender.setActionCommand(Commands.REPORT_GENDER_A.name());
+		itemReportGender.addActionListener(controllerApps);
+		
+		itemGraphGender.setActionCommand(Commands.GRAPHS_GENDER.name());
+		itemGraphGender.addActionListener(controllerApps);
+		
+
 		
 	}
 	private void setUIManager() {
@@ -148,6 +174,7 @@ public class AdminWindow extends JFrame{
 		labelReport.setFont(ConstansGUI.FONT_MENUS);
 		labelReport.setForeground(ConstansGUI.COLOR_TOOLBAR);
 		menuReports.add(labelReport);
+		menuReports.addSeparator();
 		
 		itemReportAllInstitutes=new JMenuItem();
 		menuReports.add(itemReportAllInstitutes);
@@ -168,11 +195,12 @@ public class AdminWindow extends JFrame{
 		itemReportAllDirector=new JMenuItem();
 		menuReports.add(itemReportAllDirector);
 		
-		itemReportConfirmedEvents=new JMenuItem();
-		menuReports.add(itemReportConfirmedEvents);
+		//
+		itemsReportNumberSchools=new JMenuItem();
+		menuReports.add(itemsReportNumberSchools);
 		
-		itemsReportProcessEvents=new JMenuItem();
-		menuReports.add(itemsReportProcessEvents);
+		itemReportGender=new JMenuItem();
+		menuReports.add(itemReportGender);
 		
 		labelGraphs=new JLabel();
 		labelGraphs.setFont(ConstansGUI.FONT_MENUS);
@@ -184,13 +212,11 @@ public class AdminWindow extends JFrame{
 		itemGraphEstateInstrument=new JMenuItem();
 		menuReports.add(itemGraphEstateInstrument);
 		
-		itemGraphNumberInstitute=new JMenuItem();
-		menuReports.add(itemGraphNumberInstitute);
-		
-		itemGraphFundation=new JMenuItem();
-		menuReports.add(itemGraphFundation);
+		itemGraphGender=new JMenuItem();
+		menuReports.add(itemGraphGender);
 		
 		menuBar.add(menuReports);
+		
 		
 		instituteMenu=new JMenu();
 		instituteMenu.setBorderPainted(false);
@@ -228,15 +254,19 @@ public class AdminWindow extends JFrame{
 		menuBar.add(instituteMenu);
 		
 		//buscar evento
-		menuEvents=new JMenu();
 		
-		itemAddEvent=new JMenuItem();
-		menuEvents.add(itemAddEvent);
+		menuLanguage=new JMenu();
+		menuLanguage.setBorderPainted(false);
+		itemEnglish=new JMenuItem();
+		itemEnglish.setIcon(Utilities.resizeImage(16, 16, "imgs/english_item.png"));
+		itemEnglish.setBorderPainted(false);
+		menuLanguage.add(itemEnglish);
+		itemSpanish=new JMenuItem();
+		itemSpanish.setIcon(Utilities.resizeImage(16, 16, "imgs/spanish_item.png"));
+		itemSpanish.setBorderPainted(false);
+		menuLanguage.add(itemSpanish);
+		menuBar.add(menuLanguage);
 		
-		itemSearchEvent=new JMenuItem();
-		menuEvents.add(itemSearchEvent);
-		
-		menuBar.add(menuEvents);
 		panelMenu.add(menuBar,gridMenu.insertComponent(1, 2, 9, 1));
 	}
 	public void setNickName(String nick) {
@@ -261,6 +291,8 @@ public class AdminWindow extends JFrame{
 		menuDelete.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.DELETE_MENU.name()));
 		deleteInstitute.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.INSTITUTE_ITEM.name()));
 		deleteMember.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.MEMBER_ITEM.name()));
+		
+		
 		//_____________report--------------
 		menuReports.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.MENU_REPORTS.name()));
 		labelReport.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.TABLES.name()));
@@ -270,15 +302,18 @@ public class AdminWindow extends JFrame{
 		itemReportCups.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.REPORT_CUPS.name()));
 		itemReportDirectorDepartment.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.REPORT_DIRECTOR_BY_DEPARMENT.name()));
 		itemReportAllDirector.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.REPORT_ALL_DIRECTORS.name()));
-		itemReportConfirmedEvents.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.REPORT_CONFIRMED_EVENTS.name()));
-		itemsReportProcessEvents.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.REPORT_PROCESS_EVENTS.name()));
+		itemsReportNumberSchools.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.REPORT_NUMBER_SCHOOLS.name()));
 		labelGraphs.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.GRAPHS.name()));
 		itemGraphEstateInstrument.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.GRAPHS_ESTATE_INSTRUMENT.name()));
-		itemGraphNumberInstitute.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.GRAPHS_NUMBER_INSTITUTE.name()));
-		itemGraphFundation.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.GRAPHS_FUNDATION.name()));
-		//---------events-------------
-		menuEvents.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.MENU_EVENTS.name()));
-		itemAddEvent.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.ADD_EVENTS.name()));
-		itemSearchEvent.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.SEARCH_EVENT.name()));
+		itemGraphGender.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.GRAPH_GENDER.name()));
+		itemReportGender.setText(HandlerLanguage.languageProperties.getProperty(LabelsGUI.REPORT_GENDER.name()));
+	
+		//-----------language--------------------
+		menuLanguage.setText(HandlerLanguage.languageProperties.getProperty(
+				LabelsGUI.MENU_LANGUAGE.name()));
+		itemEnglish.setText(HandlerLanguage.languageProperties.getProperty(
+				LabelsGUI.ITEM_ENGLISH.name()));
+		itemSpanish.setText(HandlerLanguage.languageProperties.getProperty(
+				LabelsGUI.ITEM_SPANISH.name()));
 	}
 }

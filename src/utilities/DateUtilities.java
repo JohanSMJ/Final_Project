@@ -49,7 +49,6 @@ public class DateUtilities {
 		if (date.getTime().getMonth() > DateUtilities.getCalendarDateNow().getTime().getMonth())
 			time = "" + (DateUtilities.getCalendarDateNow().getTime().getYear() - date.getTime().getYear()-1) ;
 
-		System.out.println(time);
 		return time;
 	}
 

@@ -29,11 +29,11 @@ public class DirectorInstitute extends Person{
 	public String getBirthDateString() {
 		return super.getBirthDateString();
 	}
-	public void setGenere(Gender genere) {
-		super.setGenere(genere);
+	public void setGender(Gender genere) {
+		super.setGender(genere);
 	}
-	public String getGenere() {
-		return super.getGenere();
+	public String getGender() {
+		return super.getGender();
 	}
 	public void setDocumentType(DocumentType documentType) {
 		super.setDocumentType(documentType);
